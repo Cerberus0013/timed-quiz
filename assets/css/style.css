@@ -3,7 +3,30 @@
   width: 100%;
   height: 100px;
   text-align: center;
+
 }
+.startPage h1{
+    font-size: x-large;
+    color: blue;
+}
+
+.startPage ul li {
+   margin: auto;
+   margin-top: 10px;
+  width: 40%;
+  height: 30%;
+  text-align: center;
+}
+
+#take {
+    font-weight: bolder;
+    color: red;
+}
+
+.ready {
+  margin-bottom: 20px;
+
+
 
 .welcome {
   margin-bottom: 20px;

@@ -3,6 +3,9 @@ var timerEl = document.getElementById("countdown");
 var mainEl = document.getElementById("main");
 var startBtn = document.getElementById("begin");
 
+function maggotFunc() {
+  confirm("Move it Maggot");
+}
 
 
 
@@ -15,6 +18,11 @@ function quizTimer() {
      window.confirm(
        "You have failed miserably, and dishonored your family for generations to come"
       //endgame()
+        window.confirm(
+        "You have failed miserably, and dishonored your family for generations to come"
+        //*  endgame()
+      );
+     } else {
     }else{
   timerEl.textContent = `Move Faster, You Have---- ${timeLeft}---- Seconds Left `;
       timeLeft--;
@@ -62,6 +70,12 @@ var questions = [
     answer: "c",
   },
 ];
+
+
+function correctAnswer() {
+  if (player'schoice === questions[2] )
+}
+
 
 
 //* . End Game function for when the time runs out
