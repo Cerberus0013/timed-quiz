@@ -1,7 +1,9 @@
 
 var timerEl = document.getElementById("countdown");
 var mainEl = document.getElementById("main");
-var startBtn = document.getElementById("begin");
+var startBtn = document.getElementById("begin")
+var quizEl = document.getElementById("quiz")
+var questionsEl = document.getElementById("questions") 
 
 function maggotFunc() {
   confirm("Move it Maggot");
@@ -33,7 +35,7 @@ function quizTimer() {
 startBtn.onclick = quizTimer;
 
 
-var questions = [
+var qQuestions = [
   {
     q: "Inside which HTML element do we put the JavaScript?",
       a: "<script>",
@@ -72,9 +74,24 @@ var questions = [
 ];
 
 
-function correctAnswer() {
-  if (player'schoice === questions[2] )
-}
+var qCount= 0
+
+quizEl.textContent = `You're On Question of ${Qcount + 1} of ${qQuestions.length}`;
+
+console.log(quizEl.textContent)
+
+questionsEl.innerHTML="<h3>"+qQuestions[qCount].q+ " </h3>";
+
+chA = qQuestions[qCount].a
+chB = qQuestions[qCount].b
+chC = qQuestions[qCount].c
+chD = qQuestions[qCount].d
+
+ questionsEl.innerHTML += "<label> <input type='radio' name='choices' value='A'>" +chA +"</label><br>";
+  questionsEl.innerHTML += "<label> <input type='radio' name='choices' value='B'>" + chB +"</label><br>";
+  questionsEl.innerHTML += "<label> <input type='radio' name='choices' value='C'> " + chC + "</label><br>"
+  questionsEl.innerHTML += "<label> <input type='radio' name='choices' value='D'> " + chD +"</label><br><br ";
+
 
 
 
