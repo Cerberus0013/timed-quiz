@@ -3,16 +3,21 @@
   width: 100%;
   height: 100px;
   text-align: center;
+  }
 
+
+.startPage{
+  text-align:center;
 }
 .startPage h1{
     font-size: x-large;
     color: blue;
+
 }
 
 .startPage ul li {
    margin: auto;
-   margin-top: 10px;
+  margin-top: 10px;
   width: 40%;
   height: 30%;
   text-align: center;
@@ -42,12 +47,10 @@
   height: 25px;
 }
 
-#questions{
-  position: flex;
+#quiz {
   justify-content: end;
   border:#243fd4 3px solid;
   padding:10px 40px 40px 40px;
   background-color:#9fa19f;
   width:50%;
-
 }

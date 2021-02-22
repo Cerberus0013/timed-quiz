@@ -1,9 +1,9 @@
 
 var timerEl = document.getElementById("countdown");
 var mainEl = document.getElementById("main");
-var startBtn = document.getElementById("begin")
+var startBtn = document.getElementById("start-btn")
 var quizEl = document.getElementById("quiz")
-var questionsEl = document.getElementById("questions") 
+var questionsEl = document.getElementById("ques") 
 
 
 
@@ -31,26 +31,26 @@ startBtn.onclick = quizTimer;
 
 var qQuestions = [
   {
-    q: "Inside which HTML element do we put the JavaScript?",
-      a: "<script>",
-      b: "<scripting>",
-      c: "<link>",
-      d: "<js>",
+    q: "Inside which HTML element do we put the JavaScript?", 
+    a: "<script>",
+    b: "<scripting>",
+    c: "<link>",
+    d: "<js>",
     answer: "a",
   },
 
   {
     q: "Which is the correct syntax for an alert?",
-      a: "",
-      b: " hhg",
-      c: "window.alert()",
-      d: "haaha",
+    a: "",
+    b: " hhg",
+    c: "window.alert()",
+    d: "haaha",
     answer: "c",
   },
 
   {
     q: "Where is the correct place to insert a JavaScript?",
-      a: "the <body> section",
+    a: "the <body> section",
       b: "the <head> section",
       c: "after the <html> section",
       d: " anywhere works",
@@ -69,7 +69,7 @@ var qQuestions = [
 
 
 //question counte
-var qCount= 0
+var qCount = 0
 var correctAnswer = 0 
 
 function viewQuestions() {
@@ -77,8 +77,12 @@ function viewQuestions() {
 if(qCount >= qQuestions.length){
 
   quizEl.textContent = "Quiz Completed"
-
   questionsEl.textContent = `You answered ${correctAnswer} out of ${qCount} correclty`
+
+qCount = 0
+correctAnswer = 0
+
+return false;
 }
 
 
@@ -86,26 +90,23 @@ quizEl.textContent = `You're On Question of ${qCount + 1} of ${qQuestions.length
 
 
 
-questionsEl.innerHTML="<h3>"+qQuestions[qCount].q+ " </h3>";
+var question = qQuestions[qCount].q
 
 // acees question in my array
+var  chA = qQuestions[qCount].a;
+var  chB = qQuestions[qCount].b;
+var  chC = qQuestions[qCount].c;
+var  chD = qQuestions[qCount].d;
 
-chA = qQuestions[qCount].a
-chB = qQuestions[qCount].b
-chC = qQuestions[qCount].c
-chD = qQuestions[qCount].d
-
+questionsEl.innerHTML = "<h3>" + question + " </h3>";
 //displaying questions, had to use ""+ concat, for some reason the``$ wouldn't work
 
-  questionsEl.innerHTML += "<label> <input type='radio' name='choices' value='A'>" +chA +"</label><br>";
-  questionsEl.innerHTML += "<label> <input type='radio' name='choices' value='B'>" + chB +"</label><br>";
-  questionsEl.innerHTML += "<label> <input type='radio' name='choices' value='C'> " + chC + "</label><br>"
-  questionsEl.innerHTML += "<label> <input type='radio' name='choices' value='D'> " + chD +"</label><br><br ";
+}
 
-};
+
 function checkAnswer() {
   //usng by name because its a looping array, selected all choices instances, i think
-  choices = document.querySelectorAll("choices");
+  choices = document.getElementsByName("choices");
   for (var i = 0; i < choices.length; i++) {
     //iterate over all 4 options
     if (choices[i].checked) {
