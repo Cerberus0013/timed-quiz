@@ -1,30 +1,27 @@
 :root {
---background-color:#9fa19f;
---btn-color : blue; 
---border-color: black;
---text: aliceblue;
---correct: green;
---wrong: red
-
+  --background-color: #9fa19f;
+  --btn-color: rgb(2, 2, 167);
+  --border-color: black;
+  --text: aliceblue;
+  --correct: green;
+  --wrong: red;
 }
 
 * {
-  font-family:Arial, Helvetica, sans-serif ;
+  font-family: Arial, Helvetica, sans-serif;
   padding: 0;
   margin: 0;
 }
 
-body{
+body {
   display: flex;
   width: 100vw;
   height: 100vh;
   justify-content: center;
- background-color:var(--background-color)
-
-
+  background-color: var(--background-color);
 }
 
-.quizContainer{
+.quizContainer {
   width: 700px;
   background-color: wheat;
   border-radius: 10px;
@@ -32,50 +29,71 @@ body{
   box-shadow: 0 0 10px 5px;
 }
 
-#start-btn{
+#start-btn {
   background-color: var(--btn-color);
-  border-radius: 15%;
-
+  font-size: 1.5;
+  padding: 15px;
+  color: var(--text)
 }
 
-.btn-layout{
- display: grid;
- grid-template-columns: auto; 
+.btn-layout {
+  display: flex;
+  justify-content:;
+  display: grid;
+  grid-template-columns:repeat(2, auto);
+  margin: 5px;
 }
-
 
 .btn {
-  color: var(--btn-color); 
+  color: var(--text);
+  background-color: var(--btn-color);
   border-radius: 15%;
-  border-color: var(--border-color);
- margin: 20px; 
+  border: var(--border-color);
+  margin: 10px;
+  width: 60%;
+  height: 30px;
+ display: flex;
+ justify-content: center;
 }
 
+.hide{
+  display: none;
+}
 
+.btn::hover{
+  border-color: violet;
+}
 
+#next-btn{
+  display: center;
+}
 
+.btn.correct{
+ background-color: var(--correct);
+}
 
-
+.btn.wrong{
+  background-color: var(--wrong);
+}
 
 .timer-Container {
   margin: auto;
   width: 100%;
   height: 100px;
   text-align: center;
-  }
-
-
-.startPage{
-  text-align:center;
 }
-.startPage h1{
-    font-size: x-large;
-    color: blue;
 
+.startPage {
+  text-align: center;
+  width: 100%;
+}
+.startPage h1 {
+  font-size: x-large;
+  color: blue;
 }
 
 .startPage ul li {
-   margin: auto;
+  margin: auto;
   margin-top: 10px;
   width: 40%;
   height: 30%;
@@ -83,14 +101,13 @@ body{
 }
 
 #take {
-    font-weight: bolder;
-    color: red;
+  font-weight: bolder;
+  color: red;
 }
 
 .ready {
   margin-bottom: 20px;
 }
-
 
 #main {
   margin-bottom: 20px;
@@ -108,8 +125,8 @@ body{
 
 #quiz {
   justify-content: end;
-  border:#243fd4 3px solid;
-  padding:10px 40px 40px 40px;
-  background-color:#9fa19f;
-  width:50%;
+  border: #243fd4 3px solid;
+  padding: 10px 40px 40px 40px;
+  background-color: #9fa19f;
+  width: 50%;
 }
