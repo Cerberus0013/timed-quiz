@@ -24,7 +24,7 @@
             <li id="take">There are no take-backsies <li>  
             </ul>  
             
-            <div class="container">
+            <div class="timer-Container">
                <h1 class="welcome">Are you ready?</h1>
                <button id="start-btn">Begin</button>
                <h2 id="countdown"></h2>
@@ -35,15 +35,17 @@
 
     <section class = "quizContainer">
         
-        
+       <div id="question-container">
+
+        <div id="question-title"></div>
         <!--added buttons, radio was not working out-->
-        <div id="question-btn" >
+        <div id="choice-btn" class="btn-layout" >
             <button class="btn">choice a</button>
-            <button class="btn"> choice b</button>
+            <button class="btn">choice b</button>
             <button class="btn">choice c</button>
             <button class="btn">choice d</button>
         </div> 
-   
+       </div>
         <div class="controls">
             <button id="next-btn" class="next-btn btn"> Next </button>
         </div>
