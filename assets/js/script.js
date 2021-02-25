@@ -3,13 +3,27 @@ var timerEl = document.getElementById("countdown");
 var mainEl = document.getElementById("main");
 var startBtn = document.getElementById("start-btn")
 var quizEl = document.getElementById("quiz")
-var questionsEl = document.getElementById("ques") 
+var questionsEl = document.getElementById("question-container") 
 
 
+startBtn.addEventListener('click', startQuiz)
 
+function startQuiz(){
+ 
+startBtn.classList.add('hide'); 
+questionsEl.classList.remove('hide') 
+}
+
+function nextQuestion() {
+
+}
+
+function answerChoice(){
+
+}
 
 function quizTimer() {
-  var timeLeft = 50;
+  var timeLeft = 40;
 
   var timeInterval = setInterval(function () {
     if (timeLeft === -1) {
