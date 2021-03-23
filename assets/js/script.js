@@ -20,8 +20,7 @@ var qCount = 0;
 
 //*end
 //*functions
-function startQuiz(){
- 
+function startQuiz(){ 
 startBtn.classList.add('hide') 
 questionsContainerEl.classList.remove('hide')
 nextQuestion() 
@@ -33,19 +32,7 @@ nextQuestion()
 
 function viewQuestions(qQuestions) {
 
-  questionEl.innertex = qQuestions.question
-  qQuestions.choices.forEach(choices => {
-    var button = document.createElement('button')
-    button.innerText = choices.a
-    button.classList.add('btn')
-    if(choices.correct){
-    button.dataset.correct = choices.correct
-  };
-    button.addEventListener('click',answerChoice )
-  choicesEl.appendChild(button)
-  
- })
-}
+} 
 
 function nextQuestion() {
 
@@ -79,43 +66,33 @@ startBtn.onclick = quizTimer;
 
 const qQuestions = [
   {
-    question: "Inside which HTML element do we put the JavaScript?", 
-    a: "<script>",
-    b: "<scripting>",
-    c: "<link>",
-    d: "<js>",
-    answer: "a",
-  },
-
-  {
-    question: "Which is the correct syntax for an alert?",
-    a: "",
-    b: " hhg",
-    c: "window.alert()",
-    d: "haaha",
-    answer: "c",
+    question: "Where is the correct place to insert a JavaScript?",
+    answers: [ {a: "the <body> section", correct: true},
+              {a: "the <head> section", correct: false},
+              {a: "after the <html> section", correct: false },
+              {a: " anywhere works", correct: false},
+   ] 
   },
 
   {
     question: "Where is the correct place to insert a JavaScript?",
-    a: "the <body> section",
-      b: "the <head> section",
-      c: "after the <html> section",
-      d: " anywhere works",
-    answer: "a",
+    answers: [ {a: "the <body> section", correct: true},
+              {a: "the <head> section", correct: false},
+              {a: "after the <html> section", correct: false },
+              {a: " anywhere works", correct: false},
+   ] 
   },
+  {
+    question: "Where is the correct place to insert a JavaScript?",
+    answers: [ {a: "the <body> section", correct: true},
+              {a: "the <head> section", correct: false},
+              {a: "after the <html> section", correct: false },
+              {a: " anywhere works", correct: false},
+   ] 
+  }
+]
+ 
 
-  // {
-  //   question: "How do you call a function named 'myFunction' ?",
-  //   choices: [  
-  //    { a: "call myFunction()",}
-  //    { b: " call function myFunction()",}
-  //    { c: "myfunction()"},
-  //    { d: "Here myFunction(), Come on boy!"},
-  //   ]
-  //   answer: "c",
-  // },
-];
 
 
 // var qCount = 0
@@ -175,19 +152,4 @@ const qQuestions = [
 
 
 
-// window.addEventListener("load", viewQuestions);
-
-
-
-
-// //* . End Game function for when the time runs out
-
-// //endGame = () => {}
-// //* create a function that when user clicks on the answer it moves to the next question,
-
-// //* if right answer appears green
-// //rightAnswer = () => {}
-
-// //* and if they guessed wrong it turns red and deducts -10 seconds
-
-
+// window.addEventListener("load", viewQuestions);}
