@@ -3,7 +3,7 @@ var timerEl = document.getElementById("countdown");
 var mainEl = document.getElementById("main");
 var startBtn = document.getElementById("start-btn")
 var quizEl = document.getElementById("quiz")
-var questionsContainerEl = document.getElementById("quizContainer")
+var questionsContainerEl = document.getElementById("question-container")
 var questionEl = document.getElementById("question-title")
  var choicesEl = document.getElementById('choice-btn')
 
@@ -27,11 +27,19 @@ nextQuestion()
 }
 
 
-
-//*need to rewrite questions, they are not working
-
+// putting the questions into their spaces
 function viewQuestions(qQuestions) {
-
+questionEl.innerText = qQuestions.question
+qQuestions.answers.forEach(answer => {
+  var button = document.createElement('button')
+  button.innerText = answer.a
+  button.classList.add("btn")
+    if(answer.correct){
+      button.dataset.correct =answer.correct
+    }
+    button.addEventListener('click', answerChoice)
+    choicesEl.appendChild(button)
+})
 } 
 
 function nextQuestion() {
