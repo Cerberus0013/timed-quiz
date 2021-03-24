@@ -17,15 +17,23 @@
 var timerEl = document.getElementById("countdown");
 var mainEl = document.getElementById("main");
 var startBtn = document.getElementById("start");
+var openerEl = document.getElementById("starter");
 
+
+startBtn.addEventListener("click", startQuiz);
+startBtn.addEventListener("click", quizTimer)
+
+function startQuiz() {
+  openerEl.classList.add("hide");
+ quizContainerEl.classList.remove("hide") 
+}
 
 function quizTimer() {
-  var timeLeft = 50;
-  
+ var timeLeft = 50 
   var timeInterval = setInterval(function () {
     if (timeLeft === -1) {
       clearInterval(timeInterval);
-      displayMessage();
+      quizOver();
     } else {
       timerEl.textContent = `You Have---- ${timeLeft}---- Seconds Left `;
       timeLeft--;
@@ -33,31 +41,31 @@ function quizTimer() {
   }, 1000);
 }
 
-startBtn.onclick = quizTimer;
 
-
-
+var quizContainerEl = document.getElementById("quiz-cont")
 var qCount= 0 
 var quizEl = document.getElementById("quiz")
 var quizCounterEl= document.getElementById("counter")
+var score = 0
 var question
 var answer 
-var chA
-var chB
-var chC
-var chD
+var chA, chB, chC, chD
 
 
 
 var questions = [
   [ "What does JS stand for?", "Jahova Saint", "Javascript", "Just Sayin", "Junior Salamandor", "B" ],
-  ["Where have all the good people gonehave all the good people gone", "Bahamas", "sailing","under a rock", "everywhere and nowhere", "D" ],
+  ["Where have all the good people gone?", "Bahamas", "sailing","under a rock", "everywhere and nowhere", "D" ],
   ["Have you seen it?", "yes", "no", "maybe,so","what?", "C" ],
   ["How do.... you do?", "Dandy", "Peachy", "A bit Peckish", "trashed", "A" ]
 ]
 
 
+
+
 function showQuestion(){ 
+
+quizOver()
 
 quizCounterEl.innerHTML = `You are on number ${qCount + 1} of ${questions.length} questions`;
 
@@ -76,6 +84,10 @@ quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' value='D'>"
 
 };
 
+function correctAnswer(){
+
+}
+
 
 function pickAnswer (){
   answer = document.getElementsByName("answers")
@@ -84,13 +96,21 @@ function pickAnswer (){
       answer = answers[i].value;
     }
   }
-  if(answer !== questions[qCount][5]){
-   timerEl.textContent - 5
+  if(answer === questions[qCount][5]){
+    score++
+  }else{
+    //* put in negative time 
   }
   qCount++
   showQuestion()
 }
 
+function quizOver(){
+  if (qCount >= questions.length || quizTimer < 0) {
+    quizCounterEl.innerhtml = "Quiz Complete"
+  }
+  return false
+}
 
 
 window.addEventListener("load", showQuestion )

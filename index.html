@@ -4,20 +4,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css">
     <title>Quick Quiz</title>
 </head>
 
-<div class="container">
+<section class="container">
+<div id="starter">
+    <div class="start-container">
       <h1 class="welcome">Are you ready?</h1>
-      <button id="start" class="btn" >Begin</button>
+      <button id="start" class="btn btn-grid" >Begin</button>
+    </div>
+</div>
+<div> 
       <h2 id="countdown"></h2>
       <p id="main"></p>
 </div>
 
 
 <body>
-    <div id="quiz" class="btn"></div>
-    <h5 id="counter"></h5>
+    <div id="quiz-cont" class="quiz-container hide">
+        <div id="quiz" class="btn btn-grid" ></div>
+        <h5 id="counter"></h5>
+    </div>
+
+</section>
 
 <script src="./assets/js/script.js" ></script>
 </body>

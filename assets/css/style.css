@@ -1,6 +1,47 @@
 
+* {
+  box-sizing: border-box;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+body {
+   color: rgb(231, 15, 15);
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: indigo;
+}
+
+.container {
+ width: 800px;
+ max-width: 80%;
+ background-color: white;
+ border-radius: 5px;
+ padding: 10px;
+ box-shadow: 0 0 10px 2px;
+}
 
 
-.answers {
-  color: red;
+.btn-grid{
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.btn{
+  border-radius: 5px;
+  padding: 12px;
+}
+
+.btn::hover{
+  border-color: aqua;
+}
+
+.hide{
+  display: none;
 }
