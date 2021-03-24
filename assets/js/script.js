@@ -59,7 +59,6 @@ var questions = [
 
 function showQuestion(){ 
 
-
 quizCounterEl.innerHTML = `You are on number ${qCount + 1} of ${questions.length} questions`;
 
 question = questions[qCount][0];
@@ -70,22 +69,22 @@ chD = questions[qCount][4];
 
 
 quizEl.innerHTML = "<h2>"+question+"<h2>";
-quizEl.innerHTML += "<button onclick= 'correctAnswer()' name='answers' value='A'>" +chA+ "</button>";
-quizEl.innerHTML += "<button onclick= 'correctAnswer()' name='answers' value='A'>"+ chB + "</button>";
-quizEl.innerHTML += "<button onclick= 'correctAnswer()' name='answers' value='A'>" +chC + "</button>";
-quizEl.innerHTML += "<button onclick= 'correctAnswer()' name='answers' value='A'>" +chD+  "</button>";
+quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' value='A'>" +chA+ "</button>";
+quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' value='B'>"+ chB + "</button>";
+quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' value='C'>" +chC + "</button>";
+quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' value='D'>" +chD+  "</button>";
 
 };
 
 
-function correctAnswer (){
-  answer = document.getElementById("answers")
-  for(var i = 0; i<answer.length; i++ ){
+function pickAnswer (){
+  answer = document.getElementsByName("answers")
+  for(var i = 0; i < answer.length; i++ ){
     if (answer[i].onclick){
       answer = answers[i].value;
     }
   }
-  if(choice !== questions[qCount][5]){
+  if(answer !== questions[qCount][5]){
    timerEl.textContent - 5
   }
   qCount++
