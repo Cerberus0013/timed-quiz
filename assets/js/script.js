@@ -12,17 +12,33 @@
 //*if/else for correct answers
 //*timer put in, connected to the correct or wrong answers
 
-var questions
+
 var qCount= 0 
 var quizEl = document.getElementById("quiz")
-var quizTitleEl= document.getElementById("quiz-name")
+var quizBodyEl= document.getElementById("quiz-body")
 var question 
+var chA
+var chB
+var chC
+var chD
 
 
-
-var questions [
+var questions = [
   [ "What does JS stand for?", "Jahova Saint", "Javascript", "Just Sayin", "Junior Salamandor", "Javsacript" ],
   ["Where have all the good people gonehave all the good people gone", "Bahamas", "sailing","under a rock", "everywhere and nowhere", "everywhere and no where" ],
   ["Have you seen it?", "yes", "no", "maybe,so","what?", "maybe,so" ],
   ["How do.... you do?", "Dandy", "Peachy", "A bit Peckish", "trashed", "Dandy" ]
-}
+]
+
+
+function showQuestion(){ 
+
+
+quizBodyEl.innerHTML = `Your are on number ${qCount + 1} of ${questions.length} questions`;
+
+question = questions[qCount][0];
+chA = questions[qCount][1];
+chB = questions[qCount][2];
+chC = questions[qCount][3];
+chD = questions[qCount][4];
+};
