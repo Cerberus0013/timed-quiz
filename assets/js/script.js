@@ -13,6 +13,30 @@
 //*timer put in, connected to the correct or wrong answers
 
 
+
+var timerEl = document.getElementById("countdown");
+var mainEl = document.getElementById("main");
+var startBtn = document.getElementById("start");
+
+
+function quizTimer() {
+  var timeLeft = 50;
+  
+  var timeInterval = setInterval(function () {
+    if (timeLeft === -1) {
+      clearInterval(timeInterval);
+      displayMessage();
+    } else {
+      timerEl.textContent = `You Have---- ${timeLeft}---- Seconds Left `;
+      timeLeft--;
+    }
+  }, 1000);
+}
+
+startBtn.onclick = quizTimer;
+
+
+
 var qCount= 0 
 var quizEl = document.getElementById("quiz")
 var quizBodyEl= document.getElementById("quiz-body")
@@ -21,6 +45,7 @@ var chA
 var chB
 var chC
 var chD
+
 
 
 var questions = [
@@ -44,8 +69,15 @@ chD = questions[qCount][4];
 
 
 quizEl.innerHTML = "<h2>"+question+"<h2>";
-quizEl = "<input type= 'button' name='answers' value='A'>"+chA
-quizEl = "<input type= 'button' name='answers' value='B'>" + chB;
-quizEl = "<input type= 'button' name='answers' value='C'>" + chC;
-quizEl = "<input type= 'button' name='answers' value='D'>" + chD;
+quizEl.innerHTML = "<button onclick= 'correctAnswer()' name='answers' value='A'>" +chA+ "</button>";
+quizEl.innerHTML = "<button onclick= 'correctAnswer()' name='answers' value='A'>"+ chB + "</button>";
+quizEl.innerHTML = "<button onclick= 'correctAnswer()' name='answers' value='A'>" +chC + "</button>";
+quizEl.innerHTML = "<button onclick= 'correctAnswer()' name='answers' value='A'>" +chD+  "</button>";
+
 };
+
+
+function correctAnswer (){
+
+}
+
