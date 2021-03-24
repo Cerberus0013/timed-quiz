@@ -39,8 +39,9 @@ startBtn.onclick = quizTimer;
 
 var qCount= 0 
 var quizEl = document.getElementById("quiz")
-var quizBodyEl= document.getElementById("quiz-body")
-var question 
+var quizCounterEl= document.getElementById("counter")
+var question
+var answer 
 var chA
 var chB
 var chC
@@ -49,17 +50,17 @@ var chD
 
 
 var questions = [
-  [ "What does JS stand for?", "Jahova Saint", "Javascript", "Just Sayin", "Junior Salamandor", "Javsacript" ],
-  ["Where have all the good people gonehave all the good people gone", "Bahamas", "sailing","under a rock", "everywhere and nowhere", "everywhere and no where" ],
-  ["Have you seen it?", "yes", "no", "maybe,so","what?", "maybe,so" ],
-  ["How do.... you do?", "Dandy", "Peachy", "A bit Peckish", "trashed", "Dandy" ]
+  [ "What does JS stand for?", "Jahova Saint", "Javascript", "Just Sayin", "Junior Salamandor", "B" ],
+  ["Where have all the good people gonehave all the good people gone", "Bahamas", "sailing","under a rock", "everywhere and nowhere", "D" ],
+  ["Have you seen it?", "yes", "no", "maybe,so","what?", "C" ],
+  ["How do.... you do?", "Dandy", "Peachy", "A bit Peckish", "trashed", "A" ]
 ]
 
 
 function showQuestion(){ 
 
 
-quizBodyEl.innerHTML = `Your are on number ${qCount + 1} of ${questions.length} questions`;
+quizCounterEl.innerHTML = `You are on number ${qCount + 1} of ${questions.length} questions`;
 
 question = questions[qCount][0];
 chA = questions[qCount][1];
@@ -69,15 +70,28 @@ chD = questions[qCount][4];
 
 
 quizEl.innerHTML = "<h2>"+question+"<h2>";
-quizEl.innerHTML = "<button onclick= 'correctAnswer()' name='answers' value='A'>" +chA+ "</button>";
-quizEl.innerHTML = "<button onclick= 'correctAnswer()' name='answers' value='A'>"+ chB + "</button>";
-quizEl.innerHTML = "<button onclick= 'correctAnswer()' name='answers' value='A'>" +chC + "</button>";
-quizEl.innerHTML = "<button onclick= 'correctAnswer()' name='answers' value='A'>" +chD+  "</button>";
+quizEl.innerHTML += "<button onclick= 'correctAnswer()' name='answers' value='A'>" +chA+ "</button>";
+quizEl.innerHTML += "<button onclick= 'correctAnswer()' name='answers' value='A'>"+ chB + "</button>";
+quizEl.innerHTML += "<button onclick= 'correctAnswer()' name='answers' value='A'>" +chC + "</button>";
+quizEl.innerHTML += "<button onclick= 'correctAnswer()' name='answers' value='A'>" +chD+  "</button>";
 
 };
 
 
 function correctAnswer (){
-
+  answer = document.getElementById("answers")
+  for(var i = 0; i<answer.length; i++ ){
+    if (answer[i].onclick){
+      answer = answers[i].value;
+    }
+  }
+  if(choice !== questions[qCount][5]){
+   timerEl.textContent - 5
+  }
+  qCount++
+  showQuestion()
 }
 
+
+
+window.addEventListener("load", showQuestion )
