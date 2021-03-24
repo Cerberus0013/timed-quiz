@@ -41,4 +41,11 @@ chA = questions[qCount][1];
 chB = questions[qCount][2];
 chC = questions[qCount][3];
 chD = questions[qCount][4];
+
+
+quizEl.innerHTML = "<h2>"+question+"<h2>";
+quizEl = "<input type= 'button' name='answers' value='A'>"+chA
+quizEl = "<input type= 'button' name='answers' value='B'>" + chB;
+quizEl = "<input type= 'button' name='answers' value='C'>" + chC;
+quizEl = "<input type= 'button' name='answers' value='D'>" + chD;
 };
