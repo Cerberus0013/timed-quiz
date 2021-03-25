@@ -1,6 +1,5 @@
 
 
-//* new thought why the hell am I creating buttons just to replace them, I'll just append them into a div and wont have to waste time with the other more complicated forEach iteration, which for the lif of me I can't seem to get to work.
 
 //*POA 
 //*1. create questions
@@ -22,6 +21,7 @@ var openerEl = document.getElementById("starter");
 
 startBtn.addEventListener("click", startQuiz);
 startBtn.addEventListener("click", quizTimer)
+window.addEventListener("load", showQuestion);
 
 function startQuiz() {
   openerEl.classList.add("hide");
@@ -80,20 +80,21 @@ quizEl.innerHTML = "<h2>"+question+"<h2>";
 quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' value='A'>" +chA+ "</button>";
 quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' value='B'>"+ chB + "</button>";
 quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' value='C'>" +chC + "</button>";
-quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' value='D'>" +chD+  "</button>";
+quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' value= 'D'>" +chD+  "</button>";
 
 };
 
-function correctAnswer(){
+var correctAnswer = function(){
 
 }
 
 
-function pickAnswer (){
-  answer = document.getElementsByName("answers")
+var pickAnswer = function() {
+  
+  var answer = document.getElementsByClassName("answers")
   for(var i = 0; i < answer.length; i++ ){
     if (answer[i].onclick){
-      answer = answers[i].value;
+      answer = answer[i].value;
     }
   }
   if(answer === questions[qCount][5]){
@@ -105,12 +106,14 @@ function pickAnswer (){
   showQuestion()
 }
 
-function quizOver(){
+var quizOver = function(){
   if (qCount >= questions.length || quizTimer < 0) {
     quizCounterEl.innerhtml = "Quiz Complete"
   }
   return false
 }
 
+var saveScores = function (){
+  localStorage.setItem("score", score)
+}
 
-window.addEventListener("load", showQuestion )
