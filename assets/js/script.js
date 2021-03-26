@@ -120,7 +120,7 @@ var pickAnswer = () =>{
 
   for (var i = 0; i < answerOptions.length; i++) {
     if (answerOptions[i].onclick) {
-      selectedAnswer
+      selectedAnswer = answerOptions[i].value;  
     }
   };
   correctAnswer();
