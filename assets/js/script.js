@@ -62,7 +62,7 @@ var chA, chB, chC, chD
 
 
 //simple arrays
-var questions = [
+const questions = [
  [ "What does JS stand for?", "Jahova Saint", "Javascript", "Just Sayin", "Junior Salamandor", "B" ],
   ["Where have all the good people gone?", "Bahamas", "sailing","under a rock", "everywhere and nowhere", "D" ],
   ["Have you seen it?", "yes", "no", "maybe,so","what?", "C" ],
@@ -70,8 +70,8 @@ var questions = [
 ]
 
 
-function showQuestion(){
-  quizOver();
+function showQuestion(quizOver){
+
 
   quizCounterEl.innerHTML = `You are on number ${qCount + 1} of ${
     questions.length
@@ -91,29 +91,36 @@ function showQuestion(){
    quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' name='answers  value='B'>"+ chB + "</button>";
    quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' name='answers' value='C'>" +chC + "</button>";
    quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers'  name='answers' value='D'>" +chD+  "</button>";
+//*error message quizOver() is not a function
+   quizOver()
 };
 
 
-var selectedAnswer;
-var answerOptions; 
+
+//var answerOptions = document.getElementsByClassName("answers");
 
 
 var correctAnswer = () => {
-  if (selectedAnswer === questions[qCount][questions.length - 1]) {
+  if (selectedAnswer === questions[qCount][5]){  //*error message: cannot read property 5 of undefined
     score++;
     //*if the value matches on the option matches the the 6th element in the Array, then its correct
+  } else {
+   // timeLeft - 7
+    //*reduce timer amount by 7, code is not correct but is s place holder 
   }
 }
 
-var pickAnswer = () => {
+//var selectedAnswer= answerOptions[i].value;
+
+var pickAnswer = () =>{       
 
   var answerOptions = document.getElementsByClassName("answers");
 
   for (var i = 0; i < answerOptions.length; i++) {
     if (answerOptions[i].onclick) {
-      selectedAnswer = answerOptions[i].value;
+      selectedAnswer
     }
-  }
+  };
   correctAnswer();
   qCount++;
   showQuestion();
