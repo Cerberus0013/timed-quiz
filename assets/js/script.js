@@ -18,22 +18,24 @@ var mainEl = document.getElementById("main");
 var startBtn = document.getElementById("start");
 var openerEl = document.getElementById("starter");
 
-
+//start buttons for quiz
 startBtn.addEventListener("click", startQuiz);
 startBtn.addEventListener("click", quizTimer)
 window.addEventListener("load", showQuestion);
 
+//make the start button disappear, and the questions appear
 function startQuiz() {
   openerEl.classList.add("hide");
  quizContainerEl.classList.remove("hide") 
 }
 
+//timer countdown
 function quizTimer() {
- var timeLeft = 50 
-  var timeInterval = setInterval(function () {
-    if (timeLeft === -1) {
-      clearInterval(timeInterval);
-      quizOver();
+ var timeLeft = 25 
+ var timeInterval = setInterval(function () {
+   if (timeLeft === -1) {
+     clearInterval(timeInterval);
+     quizOver();
     } else {
       timerEl.textContent = `You Have---- ${timeLeft}---- Seconds Left `;
       timeLeft--;
@@ -41,6 +43,12 @@ function quizTimer() {
   }, 1000);
 }
 
+var quizOver = function(){
+  if (qCount > questions.length - 1 || quizTimer < 0) {
+    quizCounterEl.innerhtml = "<h2>Quiz Complete<h2>"
+  }
+  return false
+}
 
 var quizContainerEl = document.getElementById("quiz-cont")
 var qCount= 0 
@@ -52,15 +60,13 @@ var answer
 var chA, chB, chC, chD
 
 
-
+//simple arrays
 var questions = [
-  [ "What does JS stand for?", "Jahova Saint", "Javascript", "Just Sayin", "Junior Salamandor", "B" ],
+ [ "What does JS stand for?", "Jahova Saint", "Javascript", "Just Sayin", "Junior Salamandor", "B" ],
   ["Where have all the good people gone?", "Bahamas", "sailing","under a rock", "everywhere and nowhere", "D" ],
   ["Have you seen it?", "yes", "no", "maybe,so","what?", "C" ],
   ["How do.... you do?", "Dandy", "Peachy", "A bit Peckish", "trashed", "A" ]
 ]
-
-
 
 
 function showQuestion(){ 
@@ -77,43 +83,36 @@ chD = questions[qCount][4];
 
 
 quizEl.innerHTML = "<h2>"+question+"<h2>";
-quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' value='A'>" +chA+ "</button>";
-quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' value='B'>"+ chB + "</button>";
-quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' value='C'>" +chC + "</button>";
-quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' value= 'D'>" +chD+  "</button>";
+quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' name= 'answers' value='A'>" +chA+ "</button>";
+quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' name='answers  value='B'>"+ chB + "</button>";
+quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' name='answers' value='C'>" +chC + "</button>";
+quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers'  name='answers' value='D'>" +chD+  "</button>";
 
 };
 
 var correctAnswer = function(){
+  //*if the value matches on the option matches the the 6th element in the Array, then its correct
 
 }
 
 
 var pickAnswer = function() {
+  var answer = document.getElementsByName("answers")
   
-  var answer = document.getElementsByClassName("answers")
   for(var i = 0; i < answer.length; i++ ){
-    if (answer[i].onclick){
-      answer = answer[i].value;
+    if (answer[i]){
+      answer = answers[i].value;
     }
   }
   if(answer === questions[qCount][5]){
     score++
-  }else{
-    //* put in negative time 
   }
   qCount++
   showQuestion()
 }
 
-var quizOver = function(){
-  if (qCount >= questions.length || quizTimer < 0) {
-    quizCounterEl.innerhtml = "Quiz Complete"
-  }
-  return false
-}
 
 var saveScores = function (){
-  localStorage.setItem("score", score)
+  localStorage.setItem("score", JSON.stringify(score))
 }
 
