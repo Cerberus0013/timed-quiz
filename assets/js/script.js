@@ -37,7 +37,7 @@ function quizTimer() {
      clearInterval(timeInterval);
      quizOver();
     } else {
-      timerEl.textContent = `You Have---- ${timeLeft}---- Seconds Left `;
+      timerEl.textContent = `You Have-- ${timeLeft}-- Seconds Left `;
       timeLeft--;
     }
   }, 1000);
@@ -91,28 +91,25 @@ quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers'  name='answ
 };
 
 var correctAnswer = function(){
-  //*if the value matches on the option matches the the 6th element in the Array, then its correct
-
-}
-
-
-var pickAnswer = function() {
-  var answer = document.getElementsByName("answers")
-  
-  for(var i = 0; i < answer.length; i++ ){
-    if (answer[i]){
-      answer = answers[i].value;
-    }
-  }
   if(answer === questions[qCount][5]){
     score++
+  //*if the value matches on the option matches the the 6th element in the Array, then its correct
+}
+
+var answers = document.getElementsByClassName("answers")
+
+var pickAnswer = function(answers) {
+  for(var i = 0; i < answers.length; i++ ){
+    if (answers[i].onclick){
+      answer = answers[i].value;
+    }
   }
   qCount++
   showQuestion()
 }
 
 
-var saveScores = function (){
+var saveScores = function (score){
   localStorage.setItem("score", JSON.stringify(score))
 }
-
+}
