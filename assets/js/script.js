@@ -37,7 +37,7 @@ function quizTimer() {
      clearInterval(timeInterval);
      quizOver();
     } else {
-      timerEl.textContent = `You Have---- ${timeLeft}---- Seconds Left `;
+      timerEl.textContent = `You Have-- ${timeLeft}-- Seconds Left `;
       timeLeft--;
     }
   }, 1000);
@@ -56,7 +56,8 @@ var quizEl = document.getElementById("quiz")
 var quizCounterEl= document.getElementById("counter")
 var score = 0
 var question
-var answer 
+var selectedAnswer
+var answerOptions 
 var chA, chB, chC, chD
 
 
@@ -69,50 +70,57 @@ var questions = [
 ]
 
 
-function showQuestion(){ 
+function showQuestion(){
+  quizOver();
 
-quizOver()
+  quizCounterEl.innerHTML = `You are on number ${qCount + 1} of ${
+    questions.length
+  } questions`;
 
-quizCounterEl.innerHTML = `You are on number ${qCount + 1} of ${questions.length} questions`;
+  question = questions[qCount][0];
+  chA = questions[qCount][1];
+  chB = questions[qCount][2];
+  chC = questions[qCount][3];
+  chD = questions[qCount][4];
 
-question = questions[qCount][0];
-chA = questions[qCount][1];
-chB = questions[qCount][2];
-chC = questions[qCount][3];
-chD = questions[qCount][4];
+ quizEl.innerHTML = "<h2>"+question+"<h2>"
 
 
-quizEl.innerHTML = "<h2>"+question+"<h2>";
-quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' name= 'answers' value='A'>" +chA+ "</button>";
-quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' name='answers  value='B'>"+ chB + "</button>";
-quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' name='answers' value='C'>" +chC + "</button>";
-quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers'  name='answers' value='D'>" +chD+  "</button>";
-
+   quizEl.innerHTML = "<h2>"+question+"<h2>";
+   quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' name= 'answers' value='A'>" +chA+ "</button>";
+   quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' name='answers  value='B'>"+ chB + "</button>";
+   quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' name='answers' value='C'>" +chC + "</button>";
+   quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers'  name='answers' value='D'>" +chD+  "</button>";
 };
 
-var correctAnswer = function(){
-  //*if the value matches on the option matches the the 6th element in the Array, then its correct
 
+var selectedAnswer;
+var answerOptions; 
+
+
+var correctAnswer = () => {
+  if (selectedAnswer === questions[qCount][questions.length - 1]) {
+    score++;
+    //*if the value matches on the option matches the the 6th element in the Array, then its correct
+  }
 }
 
+var pickAnswer = () => {
 
-var pickAnswer = function() {
-  var answer = document.getElementsByName("answers")
-  
-  for(var i = 0; i < answer.length; i++ ){
-    if (answer[i]){
-      answer = answers[i].value;
+  var answerOptions = document.getElementsByClassName("answers");
+
+  for (var i = 0; i < answerOptions.length; i++) {
+    if (answerOptions[i].onclick) {
+      selectedAnswer = answerOptions[i].value;
     }
   }
-  if(answer === questions[qCount][5]){
-    score++
-  }
-  qCount++
-  showQuestion()
+  correctAnswer();
+  qCount++;
+  showQuestion();
+
 }
 
-
-var saveScores = function (){
+var saveScores = function (score){
   localStorage.setItem("score", JSON.stringify(score))
 }
 
