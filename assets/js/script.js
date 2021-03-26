@@ -69,25 +69,27 @@ var questions = [
 ]
 
 
-function showQuestion(){ 
+function showQuestion(){
+  quizOver();
 
-quizOver()
+  quizCounterEl.innerHTML = `You are on number ${qCount + 1} of ${
+    questions.length
+  } questions`;
 
-quizCounterEl.innerHTML = `You are on number ${qCount + 1} of ${questions.length} questions`;
+  question = questions[qCount][0];
+  chA = questions[qCount][1];
+  chB = questions[qCount][2];
+  chC = questions[qCount][3];
+  chD = questions[qCount][4];
 
-question = questions[qCount][0];
-chA = questions[qCount][1];
-chB = questions[qCount][2];
-chC = questions[qCount][3];
-chD = questions[qCount][4];
+ quizEl.innerHTML = "<h2>"+question+"<h2>"
 
 
-quizEl.innerHTML = "<h2>"+question+"<h2>";
-quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' name= 'answers' value='A'>" +chA+ "</button>";
-quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' name='answers  value='B'>"+ chB + "</button>";
-quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' name='answers' value='C'>" +chC + "</button>";
-quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers'  name='answers' value='D'>" +chD+  "</button>";
-
+   quizEl.innerHTML = "<h2>"+question+"<h2>";
+   quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' name= 'answers' value='A'>" +chA+ "</button>";
+   quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' name='answers  value='B'>"+ chB + "</button>";
+   quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' name='answers' value='C'>" +chC + "</button>";
+   quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers'  name='answers' value='D'>" +chD+  "</button>";
 };
 
 var correctAnswer = function(){
@@ -95,10 +97,13 @@ var correctAnswer = function(){
     score++
   //*if the value matches on the option matches the the 6th element in the Array, then its correct
 }
+}
 
-var answers = document.getElementsByClassName("answers")
 
 var pickAnswer = function(answers) {
+  
+  var answers = document.getElementsByClassName("answers")
+  
   for(var i = 0; i < answers.length; i++ ){
     if (answers[i].onclick){
       answer = answers[i].value;
@@ -106,10 +111,10 @@ var pickAnswer = function(answers) {
   }
   qCount++
   showQuestion()
-}
 
+}
 
 var saveScores = function (score){
   localStorage.setItem("score", JSON.stringify(score))
 }
-}
+
