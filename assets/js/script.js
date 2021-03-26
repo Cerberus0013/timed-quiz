@@ -46,8 +46,8 @@ function quizTimer() {
 var quizOver = function(){
   if (qCount > questions.length - 1 || quizTimer < 0) {
     quizCounterEl.innerhtml = "<h2>Quiz Complete<h2>"
+    return false
   }
-  return false
 }
 
 var quizContainerEl = document.getElementById("quiz-cont")
@@ -70,7 +70,9 @@ const questions = [
 ]
 
 
-function showQuestion(quizOver){
+function showQuestion(){
+
+  
 
 
   quizCounterEl.innerHTML = `You are on number ${qCount + 1} of ${
@@ -92,7 +94,7 @@ function showQuestion(quizOver){
    quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' name='answers' value='C'>" +chC + "</button>";
    quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers'  name='answers' value='D'>" +chD+  "</button>";
 //*error message quizOver() is not a function
-   quizOver()
+   //quizOver()
 };
 
 
