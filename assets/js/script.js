@@ -56,7 +56,8 @@ var quizEl = document.getElementById("quiz")
 var quizCounterEl= document.getElementById("counter")
 var score = 0
 var question
-var answer 
+var selectedAnswer
+var answerOptions 
 var chA, chB, chC, chD
 
 
@@ -92,25 +93,30 @@ function showQuestion(){
    quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers'  name='answers' value='D'>" +chD+  "</button>";
 };
 
-var correctAnswer = function(){
-  if(answer === questions[qCount][5]){
-    score++
-  //*if the value matches on the option matches the the 6th element in the Array, then its correct
-}
-}
+
+var selectedAnswer;
+var answerOptions; 
 
 
-var pickAnswer = function(answers) {
-  
-  var answers = document.getElementsByClassName("answers")
-  
-  for(var i = 0; i < answers.length; i++ ){
-    if (answers[i].onclick){
-      answer = answers[i].value;
+var correctAnswer = () => {
+  if (selectedAnswer === questions[qCount][questions.length - 1]) {
+    score++;
+    //*if the value matches on the option matches the the 6th element in the Array, then its correct
+  }
+}
+
+var pickAnswer = () => {
+
+  var answerOptions = document.getElementsByClassName("answers");
+
+  for (var i = 0; i < answerOptions.length; i++) {
+    if (answerOptions[i].onclick) {
+      selectedAnswer = answerOptions[i].value;
     }
   }
-  qCount++
-  showQuestion()
+  correctAnswer();
+  qCount++;
+  showQuestion();
 
 }
 
