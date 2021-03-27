@@ -121,37 +121,35 @@ function showQuestion(){
 };
 
 
-
-//var answerOptions = document.getElementsByClassName("answers");
-
+var pickAnswer = () =>{       
+  
+  var answerOptions = document.getElementsByClassName("answers");
+  
+  for (var i = 0; i < answerOptions.length; i++) {
+    if (answerOptions[i].onclick) {
+      selectedAnswer = answerOptions[i].options; 
+      
+      console.log(selectedAnswer)
+    }
+  };
+  correctAnswer();
+  qCount++;
+  showQuestion();
+  
+}
 
 var correctAnswer = () => {
   if (selectedAnswer === questions[qCount].answer){  //*error message: cannot read property answer of undefined
     score++;
+
+    console.log(selectedAnswer)
+    console.log(score)
     //*if the value matches on the option matches the answer then its correct
   } else {
    // timeLeft - 7
     //*reduce timer amount by 7, code is not correct but is s place holder 
   }
 }
-
-//var selectedAnswer= answerOptions[i].value;
-
-var pickAnswer = () =>{       
-
-  var answerOptions = document.getElementsByClassName("answers");
-
-  for (var i = 0; i < answerOptions.length; i++) {
-    if (answerOptions[i].onclick) {
-      selectedAnswer = answerOptions[i].options;  
-    }
-  };
-  correctAnswer();
-  qCount++;
-  showQuestion();
-
-}
-
 
 //* local storage
 var getScores = JSON.parse(localStorage.getItem("score"))
