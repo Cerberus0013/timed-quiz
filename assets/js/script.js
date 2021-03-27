@@ -17,7 +17,7 @@ var timerEl = document.getElementById("countdown");
 var mainEl = document.getElementById("main");
 var startBtn = document.getElementById("start");
 var openerEl = document.getElementById("starter");
-
+var timeLeft = 25; 
 //start buttons for quiz
 startBtn.addEventListener("click", startQuiz);
 startBtn.addEventListener("click", quizTimer)
@@ -25,17 +25,17 @@ window.addEventListener("load", showQuestion);
 
 //make the start button disappear, and the questions appear
 function startQuiz() {
-  openerEl.classList.add("hide");
- quizContainerEl.classList.remove("hide") 
+  openerEl.classList.add("hide");//makes
+  quizContainerEl.classList.remove("hide");
 }
 
 //timer countdown
-function quizTimer() {
- var timeLeft = 25 
+function quizTimer(timeLeft) {
+var timeLeft = 25;  
  var timeInterval = setInterval(function () {
    if (timeLeft === -1) {
      clearInterval(timeInterval);
-     quizOver();
+    // alert("Time has run out")
     } else {
       timerEl.textContent = `You Have-- ${timeLeft}-- Seconds Left `;
       timeLeft--;
@@ -46,8 +46,8 @@ function quizTimer() {
 var quizOver = function(){
   if (qCount > questions.length - 1 || quizTimer < 0) {
     quizCounterEl.innerhtml = "<h2>Quiz Complete<h2>"
+    return false
   }
-  return false
 }
 
 var quizContainerEl = document.getElementById("quiz-cont")
@@ -62,65 +62,124 @@ var chA, chB, chC, chD
 
 
 //simple arrays
-var questions = [
- [ "What does JS stand for?", "Jahova Saint", "Javascript", "Just Sayin", "Junior Salamandor", "B" ],
-  ["Where have all the good people gone?", "Bahamas", "sailing","under a rock", "everywhere and nowhere", "D" ],
-  ["Have you seen it?", "yes", "no", "maybe,so","what?", "C" ],
-  ["How do.... you do?", "Dandy", "Peachy", "A bit Peckish", "trashed", "A" ]
-]
+const questions = [
+  {
+    quest: "What does JS stand for?",
+    options: ["Jahova Saint", "Javascript", "Just Sayin", "Junior Salamandor"],
+    answer: "B",
+  },
+  {
+    quest: "Which is a back end language?",
+    options: ["HTML", "CSS", "Node.js", "React"],
+    answer: "C",
+  },
+  {
+    quest: "What does HTML stand for?",
+    options: ["Harry Tomatoes Mango Lollipop", "Hyper-text Millenial Language", "Hey Tom its Me Larry", "Hypertext Markup Language"],
+    answer: "D",
+  },
+  {
+    quest: "How do you connect a CSS page to an HTML page ?",
+    options: ["anchor tags", "link elemnet", "You connect them through the Javascript", "script element"],
+    answer: "B",
+  },
+];
 
 
 function showQuestion(){
-  quizOver();
 
+    if (qCount >= questions.length || quizTimer < 0) {
+
+      var yourScore = document.createElement("h1");
+        yourScore.className = "quizScore";
+        yourScore.textContent = `You answered ${score} out of ${qCount} correctly`;
+        quizCounterEl.appendChild(yourScore);
+ 
+     var endQuiz = document.createElement('h1')
+      endQuiz.className = "end" 
+      endQuiz.textContent = "Quiz Complete";
+      quizEl.classList.add("hide"); 
+      quizCounterEl.appendChild(endQuiz)
+      return false;
+    };
+
+  
   quizCounterEl.innerHTML = `You are on number ${qCount + 1} of ${
     questions.length
   } questions`;
 
-  question = questions[qCount][0];
-  chA = questions[qCount][1];
-  chB = questions[qCount][2];
-  chC = questions[qCount][3];
-  chD = questions[qCount][4];
+  question = questions[qCount].quest;
+  chA = questions[qCount].options[0];
+  chB = questions[qCount].options[1];
+  chC = questions[qCount].options[2];
+  chD = questions[qCount].options[3];
 
- quizEl.innerHTML = "<h2>"+question+"<h2>"
 
 
    quizEl.innerHTML = "<h2>"+question+"<h2>";
-   quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' name= 'answers' value='A'>" +chA+ "</button>";
-   quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' name='answers  value='B'>"+ chB + "</button>";
-   quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' name='answers' value='C'>" +chC + "</button>";
-   quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers'  name='answers' value='D'>" +chD+  "</button>";
+   quizEl.innerHTML +="<button onclick= 'pickAnswer()' class='answers' name= 'answers' value='A' >" + chA +"</button>";
+   quizEl.innerHTML +="<button onclick= 'pickAnswer()' class='answers' name='answers value='B'>" + chB + "</button>";
+   quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' name='answers' value= 'C'>" +chC + "</button>";
+   quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers'  name='answers' value= 'D'>" +chD+  "</button>";
+//for whatever reason value='B' allows all four questions to appear
 };
 
+//*I want to pull in the selected answer with answer options, find its value and then compare it with the questions.answer value to determine if its correct.
+ 
 
-var selectedAnswer;
-var answerOptions; 
-
-
-var correctAnswer = () => {
-  if (selectedAnswer === questions[qCount][questions.length - 1]) {
-    score++;
-    //*if the value matches on the option matches the the 6th element in the Array, then its correct
-  }
-}
-
-var pickAnswer = () => {
-
-  var answerOptions = document.getElementsByClassName("answers");
-
-  for (var i = 0; i < answerOptions.length; i++) {
+var pickAnswer = () =>{       
+  
+  var answerOptions = document.getElementsByClassName('.answers');  //*console log shows answerOptions is undefined I a, not caapturing the value of the answers 
+  
+  for (var i = 0; i < answerOptions; i++) {
     if (answerOptions[i].onclick) {
-      selectedAnswer = answerOptions[i].value;
+    
+    const  selectedAnswer = answerOptions.value;//*suppose to capture the choice made and its value, which one did they select?
+      
     }
-  }
+  };
   correctAnswer();
   qCount++;
   showQuestion();
-
+  
 }
 
-var saveScores = function (score){
-  localStorage.setItem("score", JSON.stringify(score))
+
+var correctAnswer = (selectedAnswer) => {
+  if (questions[qCount].answer === selectedAnswer){  //* variable "selectAnswer" is showing as not defined, suppose to take what they slected and compare it to the correct answer.
+    score++;
+
+    console.log(selectedAnswer)
+    console.log(score)
+    //*if the value matches on the option matches the answer then its correct
+  } else {
+  //wrongAnswer()
+    //*reduce timer amount by 7, code is not correct but is s place holder 
+  }
 }
 
+var wrongAnswer = () => {
+timeLeft = timeLeft - 7;
+}
+
+
+//* local storage not working, need to get the correctAnswer to work first
+var getScores = JSON.parse(localStorage.getItem("score"))
+
+
+saveRecentScore = (event) =>{
+
+event.preventDefault();
+
+const fScore = {
+  score: recentScore,
+  name: initials
+};
+
+getScores.push(fScore)
+
+};
+
+function saveScores(score) {
+  localStorage.setItem("score", JSON.stringify('score'));
+}
