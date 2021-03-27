@@ -51,7 +51,8 @@ var quizOver = function(){
 }
 
 var quizContainerEl = document.getElementById("quiz-cont")
-var qCount= 0 
+var qCount = 0
+var aCount = 0
 var quizEl = document.getElementById("quiz")
 var quizCounterEl= document.getElementById("counter")
 var score = 0
@@ -116,20 +117,34 @@ function showQuestion(){
 
 
 
-   quizEl.innerHTML = "<h2>"+question+"<h2>";
-   quizEl.innerHTML +="<button onclick= 'pickAnswer()' class='answers' name= 'answers' value='A' >" + chA +"</button>";
-   quizEl.innerHTML +="<button onclick= 'pickAnswer()' class='answers' name='answers value='B'>" + chB + "</button>";
-   quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' name='answers' value= 'C'>" +chC + "</button>";
-   quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers'  name='answers' value= 'D'>" +chD+  "</button>";
+  quizEl.innerHTML = "<h2>" + question + "<h2>";
+ quizEl.innerHTML +="<button onclick= 'pickAnswer()' id='A' class='answers' name= 'answers' value = 'A'>" +chA+"</button>";
+ quizEl.innerHTML +="<button onclick= 'pickAnswer()' id='B' class='answers' name='answers value = 'B'>" +chB+ "</button>";
+ quizEl.innerHTML +="<button onclick= 'pickAnswer()' id='C' class='answers' name='answers' value = 'C' >" +chC+ "</button>";
+  quizEl.innerHTML +="<button onclick= 'pickAnswer()' id='D' class='answers'  name='answers' value = 'D'>" +chD+  "</button>";
 //for whatever reason value='B' allows all four questions to appear
 };
 
 //*I want to pull in the selected answer with answer options, find its value and then compare it with the questions.answer value to determine if its correct.
- 
 
-var pickAnswer = () =>{       
+
+var btnEl = document.querySelectorAll("buttton")
+console.log(btnEl)
+btnEl.forEach(answer => {
+  answer.addEventListener('click', event => {
+    console.log(event.target.value)
+  })
+})
+
+
+
+var pickAnswer = () =>{      
   
-  var answerOptions = document.querySelector('value');  //*console log shows answerOptions is undefined I a, not caapturing the value of the answers 
+ // var userAnswer = document
+  
+  var answerOptions = document.querySelector(`#${questions[qCount].answer}`).value; 
+  
+  console.log(answerOptions)
   
   for (var i = 0; i < answerOptions; i++) {
     if (answerOptions[i].onclick) {
@@ -140,6 +155,7 @@ var pickAnswer = () =>{
   };
   correctAnswer();
   qCount++;
+  aCount++
   showQuestion();
   
 }
