@@ -67,29 +67,111 @@ const questions = [
   {
     quest: "What does JS stand for?",
     options: ["Jahova Saint", "Javascript", "Just Sayin", "Junior Salamandor"],
-    answer: "B",
+    answer: "Javascript",
   },
   {
     quest: "Which is a back end language?",
     options: ["HTML", "CSS", "Node.js", "React"],
-    answer: "C",
+    answer: "Node.js",
   },
   {
     quest: "What does HTML stand for?",
-    options: ["Harry Tomatoes Mango Lollipop", "Hyper-text Millenial Language", "Hey Tom its Me Larry", "Hypertext Markup Language"],
-    answer: "D",
+    options: [
+      "Harry Tomatoes Mango Lollipop",
+      "Hyper-text Millenial Language",
+      "Hey Tom its Me Larry",
+      "Hypertext Markup Language",
+    ],
+    answer: "Hypertext Markup Language",
   },
   {
     quest: "How do you connect a CSS page to an HTML page ?",
-    options: ["anchor tags", "link elemnet", "You connect them through the Javascript", "script element"],
-    answer: "B",
+    options: [
+      "anchor tags",
+      "link elemnet",
+      "You connect them through the Javascript",
+      "script element",
+    ],
+    answer:"link elemnet" ,
   },
 ];
 
 
 function showQuestion(){
 
-    if (qCount >= questions.length || quizTimer < 0) {
+  renderQuestions()
+
+    // if (qCount >= questions.length || quizTimer < 0) {
+
+    //   var yourScore = document.createElement("h1");
+    //     yourScore.className = "quizScore";
+    //     yourScore.textContent = `You answered ${score} out of ${qCount} correctly`;
+    //     quizCounterEl.appendChild(yourScore);
+ 
+    //  var endQuiz = document.createElement('h1')
+    //   endQuiz.className = "end" 
+    //   endQuiz.textContent = "Quiz Complete";
+    //   quizEl.classList.add("hide"); 
+    //   quizCounterEl.appendChild(endQuiz)
+    //   return false;
+    // };
+
+  
+ 
+
+  // question = questions[qCount].quest;
+  // chA = questions[qCount].options[0];
+  // chB = questions[qCount].options[1];
+  // chC = questions[qCount].options[2];
+  // chD = questions[qCount].options[3];
+
+
+
+// quizEl.innerHTML = "<h2>" + question + "<h2>";
+// quizEl.innerHTML +="<button onclick= 'pickAnswer()' id='A' class='answers' name= 'answers' value = 'A'>" +chA+"</button>";
+// quizEl.innerHTML +="<button onclick= 'pickAnswer()' id='B' class='answers' name='answers' value = 'B'>" +chB+ "</button>";
+// quizEl.innerHTML +="<button onclick= 'pickAnswer()' id='C' class='answers' name='answers' value = 'C' >" +chC+ "</button>";
+// quizEl.innerHTML +="<button onclick= 'pickAnswer()' id='D' class='answers'  name='answers' value = 'D'>" +chD+  "</button>";
+// //for whatever reason value='B' allows all four questions to appear
+};
+
+//*I want to pull in the selected answer with answer options, find its value and then compare it with the questions.answer value to determine if its correct.
+
+function renderQuestions(){
+  var currentQuestion = questions[qCount];
+  var qTitle = document.getElementById('question-title');
+  qTitle.textContent = currentQuestion.quest
+  quizEl.innerHTML= ""
+  currentQuestion.options.forEach(function(option){
+   var btnNode=document.createElement('button')
+   btnNode.setAttribute('class', 'answers')
+   btnNode.setAttribute('value', option )
+   btnNode.textContent = option
+  btnNode.onclick = checkAnswer;
+  quizEl.appendChild(btnNode);
+  })
+}
+
+function checkAnswer(){ 
+  if (this.value === questions[qCount].answer) {
+    score++
+  } else {
+    console.log("wrong"); 
+  }
+  
+  qCount++
+  console.log(qCount)
+if (qCount === questions.length){
+  quizOver() 
+} else{
+  renderQuestions()
+}
+
+}
+
+function quizOver(){
+  
+ quizCounterEl.innerHTML = `You are on number ${qCount + 1} of ${questions.length} questions`;
 
       var yourScore = document.createElement("h1");
         yourScore.className = "quizScore";
@@ -102,58 +184,41 @@ function showQuestion(){
       quizEl.classList.add("hide"); 
       quizCounterEl.appendChild(endQuiz)
       return false;
-    };
-
+    }
   
-  quizCounterEl.innerHTML = `You are on number ${qCount + 1} of ${
-    questions.length
-  } questions`;
-
-  question = questions[qCount].quest;
-  chA = questions[qCount].options[0];
-  chB = questions[qCount].options[1];
-  chC = questions[qCount].options[2];
-  chD = questions[qCount].options[3];
 
 
-
-  quizEl.innerHTML = "<h2>" + question + "<h2>";
- quizEl.innerHTML +="<button onclick= 'pickAnswer()' id='A' class='answers' name= 'answers' value = 'A'>" +chA+"</button>";
- quizEl.innerHTML +="<button onclick= 'pickAnswer()' id='B' class='answers' name='answers value = 'B'>" +chB+ "</button>";
- quizEl.innerHTML +="<button onclick= 'pickAnswer()' id='C' class='answers' name='answers' value = 'C' >" +chC+ "</button>";
-  quizEl.innerHTML +="<button onclick= 'pickAnswer()' id='D' class='answers'  name='answers' value = 'D'>" +chD+  "</button>";
-//for whatever reason value='B' allows all four questions to appear
-};
-
-//*I want to pull in the selected answer with answer options, find its value and then compare it with the questions.answer value to determine if its correct.
-
-
-var btnEl = document.querySelectorAll("buttton")
-console.log(btnEl)
-btnEl.forEach(answer => {
-  answer.addEventListener('click', event => {
-    console.log(event.target.value)
-  })
-})
-
-
+// var btnEl = document.querySelectorAll("buttton")
+// console.log(btnEl)
+// btnEl.forEach(answer => {
+//   answer.addEventListener('click', event => {
+//     console.log(event.target.value)
+//   })
+// })
 
 var pickAnswer = () =>{      
   
  // var userAnswer = document
+ var correctAnswer= questions[qCount].answer
+ console.log(correctAnswer) 
+  //var answerOptions = document.querySelector(`#${questions[qCount]}`).value; 
   
-  var answerOptions = document.querySelector(`#${questions[qCount].answer}`).value; 
+  console.log(value)
+
+  if (this.value === correctAnswer) {
+   console.log('correct') 
+  } else{
+    console.log('wrong')
+  }
   
-  console.log(answerOptions)
-  
-  for (var i = 0; i < answerOptions; i++) {
-    if (answerOptions[i].onclick) {
+  // for (var i = 0; i < answerOptions; i++) {
+  //   if (answerOptions[i].onclick) {
     
-    const  selectedAnswer = answerOptions.value;//*suppose to capture the choice made and its value, which one did they select?
+  //   const  selectedAnswer = answerOptions.value;//*suppose to capture the choice made and its value, which one did they select?
       
-    }
-  };
-  correctAnswer();
+  //   }
+  // };
+  //correctAnswer();
   qCount++;
   aCount++
   showQuestion();
@@ -161,18 +226,18 @@ var pickAnswer = () =>{
 }
 
 
-var correctAnswer = (selectedAnswer) => {
-  if (questions[qCount].answer === selectedAnswer){  //* variable "selectAnswer" is showing as not defined, suppose to take what they slected and compare it to the correct answer.
-    score++;
+// var correctAnswer = (selectedAnswer) => {
+//   if (questions[qCount].answer === selectedAnswer){  //* variable "selectAnswer" is showing as not defined, suppose to take what they slected and compare it to the correct answer.
+//     score++;
 
-    console.log(selectedAnswer)
-    console.log(score)
-    //*if the value matches on the option matches the answer then its correct
-  } else {
-  //wrongAnswer()
-    //*reduce timer amount by 7, code is not correct but is s place holder 
-  }
-}
+//     console.log(selectedAnswer)
+//     console.log(score)
+//     //*if the value matches on the option matches the answer then its correct
+//   } else {
+//   //wrongAnswer()
+//     //*reduce timer amount by 7, code is not correct but is s place holder 
+//   }
+// }
 
 var wrongAnswer = () => {
 timeLeft = timeLeft - 7;
