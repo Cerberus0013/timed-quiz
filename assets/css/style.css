@@ -45,3 +45,7 @@ body {
 .hide{
   display: none;
 }
+
+.scoresaver, .initials{
+  color: red;
+}

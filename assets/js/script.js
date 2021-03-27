@@ -25,8 +25,8 @@ window.addEventListener("load", showQuestion);
 
 //make the start button disappear, and the questions appear
 function startQuiz() {
-  openerEl.classList.add("hide");
- quizContainerEl.classList.remove("hide") 
+  openerEl.classList.add("hide");//makes
+  quizContainerEl.classList.remove("hide");
 }
 
 //timer countdown
@@ -71,7 +71,7 @@ const questions = [
   {
     quest: "Where have all the good people gone?",
     options: ["Bahamas", "sailing", "under a rock", "everywhere and nowhere"],
-    answer: "everywhere and nowhere",
+    answer: "sailing",
   },
   {
     quest: "Have you seen it?",
@@ -88,8 +88,12 @@ const questions = [
 
 function showQuestion(){
 
-    if (qCount > questions.length - 1 || quizTimer < 0) {
-      quizCounterEl.innerhtml = "<h2>Quiz Complete<h2>";
+    if (qCount >= questions.length || quizTimer < 0) {
+     var endQuiz = document.createElement('h1')
+      endQuiz.className = "end" 
+      endQuiz.textContent = "Quiz Complete";
+      quizEl.classList.add("hide"); 
+      quizCounterEl.appendChild(endQuiz)
       return false;
     };
 
@@ -99,19 +103,19 @@ function showQuestion(){
   } questions`;
 
   question = questions[qCount].quest;
-  chA = questions[qCount].options[1];
-  chB = questions[qCount].options[2];
-  chC = questions[qCount].options[3];
-  chD = questions[qCount].options[4];
+  chA = questions[qCount].options[0];
+  chB = questions[qCount].options[1];
+  chC = questions[qCount].options[2];
+  chD = questions[qCount].options[3];
 
  quizEl.innerHTML = "<h2>"+question+"<h2>"
 
 
    quizEl.innerHTML = "<h2>"+question+"<h2>";
-   quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' name= 'answers' value='A'>" +chA+ "</button>";
-   quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' name='answers  value='B'>"+ chB + "</button>";
-   quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' name='answers' value='C'>" +chC + "</button>";
-   quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers'  name='answers' value='D'>" +chD+  "</button>";
+   quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' name= 'answers'>" +chA+ "</button>";
+   quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' name='answers>"+ chB + "</button>";
+   quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers' name='answers'>" +chC + "</button>";
+   quizEl.innerHTML += "<button onclick= 'pickAnswer()' class='answers'  name='answers'>" +chD+  "</button>";
 //*error message quizOver() is not a function
    //quizOver()
 };
@@ -122,9 +126,9 @@ function showQuestion(){
 
 
 var correctAnswer = () => {
-  if (selectedAnswer === questions[qCount].answer){  //*error message: cannot read property 5 of undefined
+  if (selectedAnswer === questions[qCount].answer){  //*error message: cannot read property answer of undefined
     score++;
-    //*if the value matches on the option matches the the 6th element in the Array, then its correct
+    //*if the value matches on the option matches the answer then its correct
   } else {
    // timeLeft - 7
     //*reduce timer amount by 7, code is not correct but is s place holder 
@@ -139,7 +143,7 @@ var pickAnswer = () =>{
 
   for (var i = 0; i < answerOptions.length; i++) {
     if (answerOptions[i].onclick) {
-      selectedAnswer = answerOptions[i].value;  
+      selectedAnswer = answerOptions[i].options;  
     }
   };
   correctAnswer();
@@ -148,7 +152,24 @@ var pickAnswer = () =>{
 
 }
 
-var saveScores = function (score){
-  localStorage.setItem("score", JSON.stringify(score))
-}
 
+//* local storage
+var getScores = JSON.parse(localStorage.getItem("score"))
+
+
+saveRecentScore = (event) =>{
+
+event.preventDefault();
+
+const fScore = {
+  score: recentScore,
+  name: initials
+};
+
+getScores.push(fScore)
+
+};
+
+function saveScores(score) {
+  localStorage.setItem("score", JSON.stringify('score'));
+}
