@@ -6,8 +6,8 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/aminaf1995/Lets-Celebrate">
-    <img src="./assets/images/download.jpg" alt="Logo" width="80" height="" >
+  <a href="https://github.com/Cerberus0013/timed-quiz"
+    <img src="./assets/images/download.jpg"  alt="Logo" width="80" height="" >
   </a>
 
   <h3 align="center">Quiz Time</h3>
