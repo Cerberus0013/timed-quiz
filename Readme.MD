@@ -7,7 +7,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/aminaf1995/Lets-Celebrate">
-    <img src="./assets/images/celebration.jpeg" alt="Logo" width="80" height="80">
+    <img src="./assets/images/download.jpg" alt="Logo" width="80" height="" >
   </a>
 
   <h3 align="center">Quiz Time</h3>
