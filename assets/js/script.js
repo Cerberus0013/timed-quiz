@@ -35,7 +35,7 @@ function quizTimer() {
  var timeInterval = setInterval(function () {
    if (timeLeft === -1) {
      clearInterval(timeInterval);
-     quizOver();
+     alert("Time has run out")
     } else {
       timerEl.textContent = `You Have-- ${timeLeft}-- Seconds Left `;
       timeLeft--;
@@ -63,27 +63,46 @@ var chA, chB, chC, chD
 
 //simple arrays
 const questions = [
- [ "What does JS stand for?", "Jahova Saint", "Javascript", "Just Sayin", "Junior Salamandor", "B" ],
-  ["Where have all the good people gone?", "Bahamas", "sailing","under a rock", "everywhere and nowhere", "D" ],
-  ["Have you seen it?", "yes", "no", "maybe,so","what?", "C" ],
-  ["How do.... you do?", "Dandy", "Peachy", "A bit Peckish", "trashed", "A" ]
-]
+  {
+    quest: "What does JS stand for?",
+    options: ["Jahova Saint", "Javascript", "Just Sayin", "Junior Salamandor"],
+    answer: "JavaScript",
+  },
+  {
+    quest: "Where have all the good people gone?",
+    options: ["Bahamas", "sailing", "under a rock", "everywhere and nowhere"],
+    answer: "everywhere and nowhere",
+  },
+  {
+    quest: "Have you seen it?",
+    options: ["yes", "no", "maybe,so", "what?"],
+    answer: "maybe,so",
+  },
+  {
+    quest: "How do.... you do?",
+    options: ["Dandy", "Peachy", "A bit Peckish", "trashed"],
+    answer: "Dandy",
+  },
+];
 
 
 function showQuestion(){
 
+    if (qCount > questions.length - 1 || quizTimer < 0) {
+      quizCounterEl.innerhtml = "<h2>Quiz Complete<h2>";
+      return false;
+    };
+
   
-
-
   quizCounterEl.innerHTML = `You are on number ${qCount + 1} of ${
     questions.length
   } questions`;
 
-  question = questions[qCount][0];
-  chA = questions[qCount][1];
-  chB = questions[qCount][2];
-  chC = questions[qCount][3];
-  chD = questions[qCount][4];
+  question = questions[qCount].quest;
+  chA = questions[qCount].options[1];
+  chB = questions[qCount].options[2];
+  chC = questions[qCount].options[3];
+  chD = questions[qCount].options[4];
 
  quizEl.innerHTML = "<h2>"+question+"<h2>"
 
@@ -103,7 +122,7 @@ function showQuestion(){
 
 
 var correctAnswer = () => {
-  if (selectedAnswer === questions[qCount][5]){  //*error message: cannot read property 5 of undefined
+  if (selectedAnswer === questions[qCount].answer){  //*error message: cannot read property 5 of undefined
     score++;
     //*if the value matches on the option matches the the 6th element in the Array, then its correct
   } else {
