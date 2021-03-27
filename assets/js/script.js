@@ -17,7 +17,7 @@ var timerEl = document.getElementById("countdown");
 var mainEl = document.getElementById("main");
 var startBtn = document.getElementById("start");
 var openerEl = document.getElementById("starter");
-
+var timeLeft = 25; 
 //start buttons for quiz
 startBtn.addEventListener("click", startQuiz);
 startBtn.addEventListener("click", quizTimer)
@@ -30,8 +30,8 @@ function startQuiz() {
 }
 
 //timer countdown
-function quizTimer() {
- var timeLeft = 25 
+function quizTimer(timeLeft) {
+var timeLeft = 25;  
  var timeInterval = setInterval(function () {
    if (timeLeft === -1) {
      clearInterval(timeInterval);
@@ -124,17 +124,17 @@ function showQuestion(){
 //for whatever reason value='B' allows all four questions to appear
 };
 
-//*I want to pull in the selected answer with answer options, find its value and then compare it with the questions.answer value to determin if its correct.
-
+//*I want to pull in the selected answer with answer options, find its value and then compare it with the questions.answer value to determine if its correct.
+ 
 
 var pickAnswer = () =>{       
   
-  var answerOptions = document.querySelector('btn');  //*console log shows answerOptions is undefined I a, not caapturing the value of the answers 
+  var answerOptions = document.getElementsByClassName('.answers');  //*console log shows answerOptions is undefined I a, not caapturing the value of the answers 
   
   for (var i = 0; i < answerOptions; i++) {
     if (answerOptions[i].onclick) {
     
-    const  selectedAnswer = answerOptions.value;//*suppose to capture the choise made, which one did they select?
+    const  selectedAnswer = answerOptions.value;//*suppose to capture the choice made and its value, which one did they select?
       
     }
   };
@@ -145,20 +145,25 @@ var pickAnswer = () =>{
 }
 
 
-var correctAnswer = () => {
-  if (selectedAnswer === questions.answer){  //* variable "selectAnswer" is showing as not defined, suppose to take what they slected and compare it to the correct answer.
+var correctAnswer = (selectedAnswer) => {
+  if (questions[qCount].answer === selectedAnswer){  //* variable "selectAnswer" is showing as not defined, suppose to take what they slected and compare it to the correct answer.
     score++;
 
     console.log(selectedAnswer)
     console.log(score)
     //*if the value matches on the option matches the answer then its correct
   } else {
-   timeLeft - 7
+  //wrongAnswer()
     //*reduce timer amount by 7, code is not correct but is s place holder 
   }
 }
 
-//* local storage not working
+var wrongAnswer = () => {
+timeLeft = timeLeft - 7;
+}
+
+
+//* local storage not working, need to get the correctAnswer to work first
 var getScores = JSON.parse(localStorage.getItem("score"))
 
 
