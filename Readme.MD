@@ -50,7 +50,7 @@
 Features:
 
 * Built using HTML, CSS, Java Script, DOM elements
-* It wllows you to create a quiz with button style elements
+* It is a button style, mulyple choice quiz
 * Once a button is clicked it takes you to the next question
 * It can be used for an indefinite amount of questions
 
