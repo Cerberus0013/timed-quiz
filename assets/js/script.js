@@ -129,7 +129,7 @@ function showQuestion(){
 
 var pickAnswer = () =>{       
   
-  var answerOptions = document.getElementsByClassName('.answers');  //*console log shows answerOptions is undefined I a, not caapturing the value of the answers 
+  var answerOptions = document.querySelector('value');  //*console log shows answerOptions is undefined I a, not caapturing the value of the answers 
   
   for (var i = 0; i < answerOptions; i++) {
     if (answerOptions[i].onclick) {
