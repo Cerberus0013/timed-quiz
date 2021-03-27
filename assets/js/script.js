@@ -156,7 +156,7 @@ function checkAnswer(){
   if (this.value === questions[qCount].answer) {
     score++
   } else {
-    console.log("wrong"); 
+    timeLeft= timeLeft - 7; 
   }
   
   qCount++
