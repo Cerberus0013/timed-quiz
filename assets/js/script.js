@@ -35,7 +35,7 @@ var timeLeft = 25;
  var timeInterval = setInterval(function () {
    if (timeLeft === -1) {
      clearInterval(timeInterval);
-    // alert("Time has run out")
+    alert("Time has run out")
     } else {
       timerEl.textContent = `You Have-- ${timeLeft}-- Seconds Left `;
       timeLeft--;
@@ -96,6 +96,22 @@ const questions = [
   },
 ];
 
+function quizOver(){
+  
+ quizCounterEl.innerHTML = `You are on number ${qCount + 1} of ${questions.length} questions`;
+
+      var yourScore = document.createElement("h1");
+        yourScore.className = "quizScore";
+        yourScore.textContent = `You answered ${score} out of ${qCount} correctly`;
+        quizCounterEl.appendChild(yourScore);
+ 
+     var endQuiz = document.createElement('h1')
+      endQuiz.className = "end" 
+      endQuiz.textContent = "Quiz Complete";
+      quizEl.classList.add("hide"); 
+      quizCounterEl.appendChild(endQuiz)
+      return false;
+    }
 
 function showQuestion(){
 
@@ -138,6 +154,9 @@ function showQuestion(){
 //*I want to pull in the selected answer with answer options, find its value and then compare it with the questions.answer value to determine if its correct.
 
 function renderQuestions(){
+quizCounterEl.innerHTML = `You are on number ${qCount + 1} of ${
+ questions.length } questions`;
+
   var currentQuestion = questions[qCount];
   var qTitle = document.getElementById('question-title');
   qTitle.textContent = currentQuestion.quest
@@ -155,13 +174,14 @@ function renderQuestions(){
 function checkAnswer(){ 
   if (this.value === questions[qCount].answer) {
     score++
+   console.log(score) 
   } else {
     timeLeft= timeLeft - 7; 
   }
   
   qCount++
   console.log(qCount)
-if (qCount === questions.length){
+if (qCount >= questions.length){
   quizOver() 
 } else{
   renderQuestions()
@@ -169,22 +189,6 @@ if (qCount === questions.length){
 
 }
 
-function quizOver(){
-  
- quizCounterEl.innerHTML = `You are on number ${qCount + 1} of ${questions.length} questions`;
-
-      var yourScore = document.createElement("h1");
-        yourScore.className = "quizScore";
-        yourScore.textContent = `You answered ${score} out of ${qCount} correctly`;
-        quizCounterEl.appendChild(yourScore);
- 
-     var endQuiz = document.createElement('h1')
-      endQuiz.className = "end" 
-      endQuiz.textContent = "Quiz Complete";
-      quizEl.classList.add("hide"); 
-      quizCounterEl.appendChild(endQuiz)
-      return false;
-    }
   
 
 
